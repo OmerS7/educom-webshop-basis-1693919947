@@ -1,6 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head></head>
-    <body></body>
-    
+<body>
+    <header>
+        <h1>Mijn eerste website</h1>
+    </header>
+
+    <div class="bulletpoints">
+        <ul>
+            <li><a href="about.index">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </div>
+
+    <form>
+        <label for="aanhef">Kies uw aanhef:</label>
+        <select id="aanhef" name="aanhef">
+            <option value="heer">Heer</option>
+            <option value="mevrouw">Mevrouw</option>
+            <option value="anders">Anders</option>
+        </select>
+        <br><br>
+
+        <form method="POST">
+            <label for="naam">Naam:</label>
+            <input type="text" id="naam" name="naam" required>
+            <br><br>
+
+            <label for="telefoon">Telefoonnummer:</label>
+            <input type="tel" id="telefoon" name="telefoon">
+            <br><br>
+
+            <label for="e-mail">Naam:</label>
+            <input type="e-mail" id="email" name="email" required>
+            <br><br>
+
+            <p>Kies uw voorkeur</p>
+            <label>
+                <input type="radio" name="communication" value="telefoon">
+                Telefoonnummer
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="communication" value="mail">
+                E-mailadres
+            </label>
+            <br><br>
+
+            <label for="ivoerveld"></label>
+            <input type="text" id="voornaam" name="voornaam" placeholder="Typ hier" required>
+            <br><br>
+
+            <input type="submit" value="Verzenden">
+        </form>
+
+    <footer>
+        <p>&copy;</p>
+        <p>2023</p>
+        <p>Omer Seker</p>
+    </footer>
+
+</body>
 </html>
