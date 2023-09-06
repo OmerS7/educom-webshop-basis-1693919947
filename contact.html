@@ -13,6 +13,7 @@
         </ul>
     </div>
 
+    <div class="aanhefknop">
     <form>
         <label for="aanhef">Kies uw aanhef:</label>
         <select id="aanhef" name="aanhef">
@@ -21,36 +22,42 @@
             <option value="anders">Anders</option>
         </select>
         <br><br>
+    </div>    
 
-        <form method="POST">
-            <label for="naam">Naam:</label>
-            <input type="text" id="naam" name="naam" required>
-            <br><br>
+        <div class="invoerknoppen">
+            <form method="POST">
+                <label for="naam">Naam:</label>
+                <input type="text" id="naam" name="naam" required>
+                <br><br>
 
-            <label for="telefoon">Telefoonnummer:</label>
-            <input type="tel" id="telefoon" name="telefoon">
-            <br><br>
+                <label for="telefoon">Telefoonnummer:</label>
+                <input type="tel" id="telefoon" name="telefoon">
+                <br><br>
 
-            <label for="e-mail">E-mailadres:</label>
-            <input type="e-mail" id="email" name="email" required>
-            <br><br>
-
-            <p>Kies uw voorkeur</p>
-            <label>
-                <input type="radio" name="communication" value="telefoon">
-                Telefoonnummer
-            </label>
-            <br>
-            <label>
-                <input type="radio" name="communication" value="mail">
-                E-mailadres
-            </label>
-            <br><br>
-
-            <textarea id="opmerkingen" name="opmerkingen" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"></textarea>
-            <br><br>
-
-            <input type="submit" value="Verzenden">
+                <label for="e-mail">E-mailadres:</label>
+                <input type="e-mail" id="email" name="email" required>
+                <br><br>
+        </div>
+            <div>
+                <p>Kies uw voorkeur</p>
+                <label>
+                    <input type="radio" name="communication" value="telefoon">
+                    Telefoonnummer
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="communication" value="mail">
+                    E-mailadres
+                </label>
+                <br><br>
+            </div>
+            <div class="opmeringContact">
+                <textarea id="opmerkingen" name="opmerkingen" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"></textarea>
+                <br><br>
+            </div>
+            <div class="verzendknop"> 
+                <input type="submit" value="Verzenden">
+            </div>
         </form>
 
     <footer>
