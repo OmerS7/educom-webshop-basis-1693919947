@@ -1,1 +1,43 @@
 /* Cascade Style Sheet for this website */
+header {
+    font-size: 18px;
+    
+}
+
+
+.bulletpoints ul {
+    list-style: none;
+    text-decoration: none;
+}
+
+.bulletpoints ul li {
+    display: inline;
+    margin-right: 10px;
+    border: solid 1px;
+    background-color: blue;
+}
+
+.bulletpoints a {
+    color: white;
+    text-decoration: none;
+}
+
+div p {
+color: darkgrey;
+font-size: 12px;
+}
+
+footer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: black;
+    color: white;
+    font-size: 10px;
+}
+
+.invoerknoppen input[type="text"],
+.invoerknoppen input[type="tel"],
+.invoerknoppen input[type="e-mail"] {
+    width: 400px;
+}
