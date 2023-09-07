@@ -1,24 +1,37 @@
 /* Cascade Style Sheet for this website */
+body {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 header {
-    font-size: 18px;
-    
+    min-height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
-.bulletpoints ul {
+.menu ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     list-style: none;
+    background-color: blue;
     text-decoration: none;
 }
 
-.bulletpoints ul li {
+.menu ul li {
     display: inline;
     margin-right: 10px;
     border: solid 1px;
-    background-color: blue;
-}
+    border-color: white;
+   }
 
-.bulletpoints a {
+.menu a {
     color: white;
+    background-color: blue;
     text-decoration: none;
 }
 
@@ -31,13 +44,22 @@ footer{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     color: white;
     font-size: 10px;
 }
 
-.invoerknoppen input[type="text"],
-.invoerknoppen input[type="tel"],
-.invoerknoppen input[type="e-mail"] {
+input {
     width: 400px;
+}
+input[type="radio"], input[type="submit"] {
+    width: auto;
+}
+label {
+    width: 150px;
+    display: inline-block;
+}
+
+.commentContact{
+    margin-left: 150px;
 }

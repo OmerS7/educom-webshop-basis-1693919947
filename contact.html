@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <link rel="stylesheet"  href="CSS/body.css">
         <link rel="stylesheet"  href="CSS/stylesheet.css">
 </head>
 <body>
@@ -9,7 +8,7 @@
         <h1>Mijn eerste website</h1>
     </header>
 
-    <div class="bulletpoints">
+    <div class="menu">
         <ul>
             <li><a href="about.index">HOME</a></li>
             <li><a href="about.html">ABOUT</a></li>
@@ -17,52 +16,49 @@
         </ul>
     </div>
 
-    <div class="aanhefknop">
-    <form>
-        <label for="aanhef">Kies uw aanhef:</label>
-        <select id="aanhef" name="aanhef">
-            <option value="heer">Heer</option>
-            <option value="mevrouw">Mevrouw</option>
-            <option value="anders">Anders</option>
-        </select>
-        <br><br>
-    </div>    
-
-        <div class="invoerknoppen">
-            <form method="POST">
-                <label for="naam">Naam:</label>
-                <input type="text" id="naam" name="naam" required>
-                <br><br>
-
-                <label for="telefoon">Telefoonnummer:</label>
-                <input type="tel" id="telefoon" name="telefoon">
-                <br><br>
-
-                <label for="e-mail">E-mailadres:</label>
-                <input type="e-mail" id="email" name="email" required>
-                <br><br>
+    <form action="POST">
+        <div class="salutationbutton"></div>
+            <label for="salutation">Kies uw aanhef:</label>
+            <select id="salutation" name="aanhef">
+                <option value="sir">Heer</option>
+                <option value="madam">Mevrouw</option>
+                <option value="other">Anders</option>
+        </select>   
+        </div>    
+        <div>
+            <label for="name">Naam:</label>
+            <input type="text" id="name" name="name" required>
         </div>
-            <div>
-                <p>Kies uw voorkeur</p>
-                <label>
-                    <input type="radio" name="communication" value="telefoon">
-                    Telefoonnummer
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="communication" value="mail">
-                    E-mailadres
-                </label>
+        <div> 
+            <label for="phone">Telefoonnummer:</label>
+            <input type="tel" id="phone" name="phone">
+        </div>  
+        <div>
+            <label for="e-mail">E-mailadres:</label>
+            <input type="e-mail" id="email" name="email" required>
+        </div>
+
+        <div>
+            <p>Kies uw voorkeur</p>
+            <label>
+                <input type="radio" name="communication" value="cellphone">
+                Telefoonnummer
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="communication" value="mail">
+                E-mailadres
+            </label>
+            <br><br>
+            </div>
+            <div class="commentContact">
+                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"></textarea>
                 <br><br>
             </div>
-            <div class="opmeringContact">
-                <textarea id="opmerkingen" name="opmerkingen" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"></textarea>
-                <br><br>
+            <div class="sendbutton"> 
+                <input type="submit" value="send">
             </div>
-            <div class="verzendknop"> 
-                <input type="submit" value="Verzenden">
-            </div>
-        </form>
+        </form> 
 
     <footer>
         <p>&copy;</p>
