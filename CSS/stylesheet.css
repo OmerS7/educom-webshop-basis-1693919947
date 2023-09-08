@@ -10,6 +10,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family:'Times New Roman', Times, serif
 }
 
 
@@ -58,6 +59,7 @@ input[type="radio"], input[type="submit"] {
 label {
     width: 150px;
     display: inline-block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .commentContact{

@@ -5,37 +5,41 @@
 </head>
 <body>
 <?php
-    $name = $email = $phone = $gender "";
+     function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+          }
+    
+    $name = $email = $phone = $gender = "";
     $nameErr = $emailErr = $phoneErr = $genderERR = "";
     $valid = false;
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["name"])) {
-          $nameErr = "Name is required";
+          $nameErr = "Voer een naam in";
         } else {
-          $name = test_input($_POST["name"]);
-          if (!preg_match("/^[a-zA-Z-' ]*$/",$name)) {
-            $nameErr = "Only letters and white space allowed";
-          }
+            $name = test_input($_POST["name"]);
         }
 
         if (empty($_POST["email"])){
-            $emailERR = "Email is required";
+            $emailErr = "Voer een emailadres in";
         } else {
             $email = test_input($_POST["email"]);
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $emailErr = "Invalid email format";
+                $emailErr = "Voer een geldig emailadres in";
               }
         }
         
         if (empty($_POST["phone"])){
-            $phoneERR = "Phone is required";
+            $phoneErr = "Voer een telefoonnummer in";
         } else {
             $phone = test_input($_POST["phone"]); 
         }
 
         if (empty($_POST["gender"])){
-            $genderERR = "Gender is required";
+            $genderErr = "Gender is required";
         } else {
             $gender = test_input($_POST["gender"]); 
         }
@@ -43,20 +47,24 @@
     ?>
     
     <header>
-        <h1>Mijn eerste website</h1>
+        <h1>Contact</h1>
     </header>
 
     <div class="menu">
         <ul>
-            <li><a href="about.index">HOME</a></li>
+            <li><a href="index.html">HOME</a></li>
             <li><a href="about.html">ABOUT</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
+            <li><a href="contact.php">CONTACT</a></li>
         </ul>
     </div>
-    <?php if (!$valid) { ?>
-        <form method="POST" action="contact.php">;
 
-    <form action="post">
+    <section>
+
+    <?php if (!$valid) { ?>
+
+        <form method="POST" action="contact.php">
+
+    <form action="POST">
         <div class="salutationbutton"></div>
             <label for="salutation">Kies uw aanhef:</label>
             <select id="salutation" name="aanhef">
@@ -110,7 +118,8 @@
 
         <?php } else {?>
             <p>Bedankt voor uw reactie:</p>
-        <?php}?>
+        <?php }?>
+    </section>
 
     <footer>
         <p>&copy;</p>
