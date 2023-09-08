@@ -3,6 +3,7 @@ body {
     width: 800px;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 header {
@@ -10,7 +11,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family:'Times New Roman', Times, serif
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 
@@ -19,21 +20,23 @@ header {
     justify-content: center;
     align-items: center;
     list-style: none;
-    background-color: blue;
     text-decoration: none;
 }
 
 .menu ul li {
     display: inline;
     margin-right: 10px;
-    border: solid 1px;
-    border-color: white;
    }
 
 .menu a {
     color: white;
-    background-color: blue;
+    background-color: rgb(17, 19, 161);
     text-decoration: none;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 div p {
@@ -52,14 +55,53 @@ footer{
 
 input {
     width: 400px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
 }
-input[type="radio"], input[type="submit"] {
+
+input[type="radio"]{
     width: auto;
+    box-shadow: none;
+    background-color: transparent;
 }
+
+input[type="submit"] {
+    width: auto;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
+    background-color: transparent;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 500px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    transform: translate(10px);
+}
+
+
 label {
     width: 150px;
     display: inline-block;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+select {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 0.5px solid;
+    border-color: rgb(216, 216, 216);
+}
+
+textarea{
+    border: none;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 .commentContact{

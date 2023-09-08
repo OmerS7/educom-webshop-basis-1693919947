@@ -72,7 +72,7 @@
                 <option value="madam">Mevrouw</option>
                 <option value="other">Anders</option>
                 <span class="error">* <?php echo $nameErr;?></span>
-            <br><br>     
+                <br><br>    
         </select>   
         </div>    
         <div>
@@ -112,7 +112,7 @@
                 <br><br>
             </div>
             <div class="sendbutton"> 
-                <input type="submit" value="send">
+                <input type="submit" value="Verzend">
             </div>
         </form> 
 
