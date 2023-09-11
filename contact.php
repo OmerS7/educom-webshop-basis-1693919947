@@ -12,8 +12,8 @@
         return $data;
           }
     
-    $name = $email = $phone = $gender = "";
-    $nameErr = $emailErr = $phoneErr = $genderERR = "";
+    $name = $email = $phone = $salutation = $communication = $comment = "";
+    $nameErr = $emailErr = $phoneErr = $salutationErr = $communicationErr = $commentErr = "";
     $valid = false;
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -38,10 +38,22 @@
             $phone = test_input($_POST["phone"]); 
         }
 
-        if (empty($_POST["gender"])){
-            $genderErr = "Gender is required";
+        if (empty($_POST["salutation"])){
+            $salutationErr = "Aanhef verplicht";
         } else {
-            $gender = test_input($_POST["gender"]); 
+            $salutation = test_input($_POST["salutation"]); 
+        }
+
+        if (empty($_POST["communication"])){
+            $communicationErr = "Voorkeur is verplicht";
+        } else {
+            $communication = test_input($_POST["communication"]); 
+        }
+
+        if (empty($_POST["comment"])){
+            $commentErr = "Plaats een opmerking";
+        } else {
+            $comment = test_input($_POST["comment"]); 
         }
     }
     ?>
@@ -62,18 +74,16 @@
 
     <?php if (!$valid) { ?>
 
-        <form method="POST" action="contact.php">
-
-    <form action="POST">
+    <form method="POST" action="contact.php">
         <div class="salutationbutton"></div>
             <label for="salutation">Kies uw aanhef:</label>
             <select id="salutation" name="aanhef">
                 <option value="sir">Heer</option>
                 <option value="madam">Mevrouw</option>
                 <option value="other">Anders</option>
-                <span class="error">* <?php echo $nameErr;?></span>
-                <br><br>    
-        </select>   
+            </select>
+            <span class="error">* <?php echo $salutationErr;?></span>
+                <br><br>     
         </div>    
         <div>
             <label for="name">Naam:</label>
@@ -105,12 +115,13 @@
                 <input type="radio" name="communication" value="mail">
                 E-mailadres
             </label>
-            <br><br>
+            <span class="error">* <?php echo $communicationErr;?></span>
+                <br><br>   
             </div>
             <div class="commentContact">
                 <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"></textarea>
-                <br><br>
-            </div>
+                <span class="error">* <?php echo $commentErr;?></span>
+                <br><br>               </div>
             <div class="sendbutton"> 
                 <input type="submit" value="Verzend">
             </div>
