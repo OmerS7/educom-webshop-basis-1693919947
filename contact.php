@@ -57,8 +57,7 @@
         }
 
         if (empty($nameErr) && empty($emailErr) && empty($phoneErr) && empty($salutationErr) && empty($communicationErr) && empty($commentErr)) {
-            header('Location: bedankt.php');
-            exit();
+            $valid = true;
         }
 
     }
