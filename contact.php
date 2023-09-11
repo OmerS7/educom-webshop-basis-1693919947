@@ -55,6 +55,12 @@
         } else {
             $comment = test_input($_POST["comment"]); 
         }
+
+        if (empty($nameErr) && empty($emailErr) && empty($phoneErr) && empty($salutationErr) && empty($communicationErr) && empty($commentErr)) {
+            header('Location: bedankt.php');
+            exit();
+        }
+
     }
     ?>
     
@@ -77,7 +83,7 @@
     <form method="POST" action="contact.php">
         <div class="salutationbutton"></div>
             <label for="salutation">Kies uw aanhef:</label>
-            <select id="salutation" name="aanhef">
+            <select id="salutation" name="salutation">
                 <option value="sir">Heer</option>
                 <option value="madam">Mevrouw</option>
                 <option value="other">Anders</option>
@@ -87,19 +93,19 @@
         </div>    
         <div>
             <label for="name">Naam:</label>
-            <input type="text" id="name" name="name">
+            <input type="text" id="name" name="name" value="<?php echo $name;?>">
             <span class="error">* <?php echo $nameErr;?></span>
             <br><br>
         </div>
         <div> 
             <label for="phone">Telefoonnummer:</label>
-            <input type="tel" id="phone" name="phone">
+            <input type="tel" id="phone" name="phone" value="<?php echo $phone;?>">
             <span class="error">* <?php echo $phoneErr;?></span>
             <br><br>
         </div>  
         <div>
             <label for="e-mail">E-mailadres:</label>
-            <input type="e-mail" id="email" name="email">
+            <input type="e-mail" id="email" name="email" value="<?php echo $email;?>">
             <span class="error">* <?php echo $emailErr;?></span>
             <br><br>
         </div>
@@ -107,26 +113,26 @@
         <div>
             <p>Kies uw voorkeur</p>
             <label>
-                <input type="radio" name="communication" value="cellphone">
+                <input type="radio" name="communication" <?php if (isset($communication) && $communication =="Telefoonnummer") echo "checked";?> value="Telefoonnummer">
                 Telefoonnummer
             </label>
             <br>
             <label>
-                <input type="radio" name="communication" value="mail">
+                <input type="radio" name="communication" <?php if (isset($communication) && $communication =="E-mailadres") echo "checked";?> value="E-mailadres">
                 E-mailadres
             </label>
             <span class="error">* <?php echo $communicationErr;?></span>
                 <br><br>   
             </div>
             <div class="commentContact">
-                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"></textarea>
+                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"><?php echo $comment;?>"</textarea>
                 <span class="error">* <?php echo $commentErr;?></span>
                 <br><br>               </div>
             <div class="sendbutton"> 
                 <input type="submit" value="Verzend">
             </div>
-        </form> 
-
+        </form>
+        
         <?php } else {?>
             <p>Bedankt voor uw reactie:</p>
         <?php }?>
