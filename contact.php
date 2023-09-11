@@ -124,7 +124,7 @@
                 <br><br>   
             </div>
             <div class="commentContact">
-                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"><?php echo $comment;?>"</textarea>
+                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"><?php echo $comment;?></textarea>
                 <span class="error">* <?php echo $commentErr;?></span>
                 <br><br>               </div>
             <div class="sendbutton"> 
