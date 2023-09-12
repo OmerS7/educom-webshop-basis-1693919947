@@ -69,8 +69,8 @@
 
     <div class="menu">
         <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="home.php">HOME</a></li>
+            <li><a href="about.php">ABOUT</a></li>
             <li><a href="contact.php">CONTACT</a></li>
         </ul>
     </div>
