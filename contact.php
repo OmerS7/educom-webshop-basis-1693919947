@@ -85,13 +85,13 @@ function test_input($data) {
                 <input type="email" id="email" name="email" value="'.$email.'">
                 <span class="error">* '.$emailErr.'</span><br><br>
 
-                <p>Kies uw voorkeur</p>
+                <p class="preferenceSentence">Kies uw voorkeur</p>
                 <label>
-                    <input type="radio" name="communication" '.((isset($communication) && $communication =="Telefoonnummer") ? "checked" : "").' value="Telefoonnummer">
+                    <input type="radio" name="communication" '.($communication =="Telefoonnummer"? "checked" : "").' value="Telefoonnummer">
                     Telefoonnummer
                 </label><br>
                 <label>
-                    <input type="radio" name="communication" '.((isset($communication) && $communication =="E-mailadres") ? "checked" : "").' value="E-mailadres">
+                    <input type="radio" name="communication" '.($communication =="E-mailadres" ? "checked" : "").' value="E-mailadres">
                     E-mailadres
                 </label>
                 <span class="error">* '.$communicationErr.'</span><br><br>

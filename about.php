@@ -9,7 +9,7 @@
                 <p>In mijn vrije tijd houd ik mijzelf graag bezig met de volgende activiteiten:</p>
                     <li>Gezellig drankje doen met vrienden</li>
                     <li>Naar de film gaan</li>
-                    <li>Thuis op de bank netflixen</li>
+                    <li>Thuis op de bank Netflixen</li>
                     <li>Reizen</li>
                 </p>
              </div>';
