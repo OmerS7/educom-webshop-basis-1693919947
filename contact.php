@@ -1,3 +1,117 @@
+<?php
+
+function showContactHeader(){
+    echo 'Contact';
+}
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+    function showContactContent() {
+        $name = $email = $phone = $salutation = $communication = $comment = "";
+        $nameErr = $emailErr = $phoneErr = $salutationErr = $communicationErr = $commentErr = "";
+        $valid = false;
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (empty($_POST["name"])) {
+            $nameErr = "Voer een naam in";
+        } else {
+            $name = test_input($_POST["name"]);
+        }
+
+        if (empty($_POST["email"])){
+            $emailErr = "Voer een emailadres in";
+        } else {
+            $email = test_input($_POST["email"]);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emailErr = "Voer een geldig emailadres in";
+            }
+        }
+
+        if (empty($_POST["phone"])){
+            $phoneErr = "Voer een telefoonnummer in";
+        } else {
+            $phone = test_input($_POST["phone"]);
+        }
+
+        if (empty($_POST["salutation"])){
+            $salutationErr = "Aanhef verplicht";
+        } else {
+            $salutation = test_input($_POST["salutation"]);
+        }
+
+        if (empty($_POST["communication"])){
+            $communicationErr = "Voorkeur is verplicht";
+        } else {
+            $communication = test_input($_POST["communication"]);
+        }
+
+        if (empty($_POST["comment"])){
+            $commentErr = "Plaats een opmerking";
+        } else {
+            $comment = test_input($_POST["comment"]);
+        }
+
+        if (empty($nameErr) && empty($emailErr) && empty($phoneErr) && empty($salutationErr) && empty($communicationErr) && empty($commentErr)) {
+            $valid = true;
+        }
+    }
+
+    echo '<section>';
+
+    if (!$valid) {
+        echo '<form method="POST" action="index.php">
+                <label for="salutation">Kies uw aanhef:</label>
+                <select id="salutation" name="salutation">
+                    <option value="sir">Heer</option>
+                    <option value="madam">Mevrouw</option>
+                    <option value="other">Anders</option>
+                </select>
+                <span class="error">* '.$salutationErr.'</span><br><br>
+
+                <label for="name">Naam:</label>
+                <input type="text" id="name" name="name" value="'.$name.'">
+                <span class="error">* '.$nameErr.'</span><br><br>
+
+                <label for="phone">Telefoonnummer:</label>
+                <input type="tel" id="phone" name="phone" value="'.$phone.'">
+                <span class="error">* '.$phoneErr.'</span><br><br>
+
+                <label for="email">E-mailadres:</label>
+                <input type="email" id="email" name="email" value="'.$email.'">
+                <span class="error">* '.$emailErr.'</span><br><br>
+
+                <p>Kies uw voorkeur</p>
+                <label>
+                    <input type="radio" name="communication" '.((isset($communication) && $communication =="Telefoonnummer") ? "checked" : "").' value="Telefoonnummer">
+                    Telefoonnummer
+                </label><br>
+                <label>
+                    <input type="radio" name="communication" '.((isset($communication) && $communication =="E-mailadres") ? "checked" : "").' value="E-mailadres">
+                    E-mailadres
+                </label>
+                <span class="error">* '.$communicationErr.'</span><br><br>
+                <div class="commentContact">
+                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in">'.$comment.'</textarea>
+                <span class="error">* '.$commentErr.'</span><br><br>
+                </div>
+                <input type="hidden" name="page" value="contact">
+                <input type="submit" value="Verzend">
+              </form>';
+    } else {
+        echo '<p>Bedankt voor uw reactie.</p>';
+    }
+
+    echo '</section>';
+}
+
+
+
+/*
 <!DOCTYPE html>
 <html>
 <head>
@@ -145,3 +259,4 @@
 
 </body>
 </html>
+*/

@@ -22,7 +22,7 @@ function showResponsePage ($page)
     beginDocument();
     showHeadSection();
     showBodySection($page);
-    enDocument();
+    endDocument();
 }
 
 function getArrayVar($array, $key, $default='')
@@ -35,28 +35,31 @@ function getPostVar($key,$default='')
     return getArrayVar($_POST, $key, $default);
 }
 
+function getUrlVar($key,$default='')
+{
+    return getArrayVar($_GET, $key, $default);
+}
+
 function beginDocument()
 {
-    echo '<!doctype html>
-    <html>';
+    echo '<!doctype html>'.PHP_EOL.'<html>'.PHP_EOL;
 }
 
 function showHeadSection()
 {
-    echo ' <head>' . PHP_EOL;
-    showTitle();
-    showLink();
-    echo ' </head>' . PHP_EOL;
+    echo '  <head>' . PHP_EOL;
+    echo '    <link rel="stylesheet"  href="CSS/stylesheet.css">' . PHP_EOL;
+    echo '  </head>' . PHP_EOL;
 }
 
 function showBodySection($page)
 {
-    echo '      <body>' . PHP_EOL;
+    echo '  <body>' . PHP_EOL;
     showHeader($page);
     showMenu();
     showContent($page);
     showFooter();
-    echo '      <?body>' .PHP_EOL;
+    echo '  <?body>' .PHP_EOL;
 }
 
 function endDocument()
@@ -66,42 +69,57 @@ function endDocument()
 
 function showHeader($page)
 {
-    echo '<h1>Mijn eerste website</h1>';
+    echo '<header><h1>';
+    if ($page == 'home') {
+        require_once('home.php');
+        showHomeHeader();
+    } elseif ($page == 'about'){
+        require_once('about.php');
+        showAboutHeader();
+    } elseif($page == 'contact'){
+        require_once('contact.php');
+        showContactHeader();
+    }
+    echo '</h1></header>' . PHP_EOL;
 }
 
 function showMenu()
 {
-    echo '<ul>
-    <li><a href="index.html">HOME</a></li>
-    <li><a href="about.html">ABOUT</a></li>
-    <li><a href="contact.php">CONTACT</a></li>
-</ul>';
+    echo '<div class="menu">
+            <ul>
+              <li><a href="index.php?page=home">HOME</a></li>
+              <li><a href="index.php?page=about">ABOUT</a></li>
+              <li><a href="index.php?page=contact">CONTACT</a></li>
+            </ul>
+          </div>' . PHP_EOL;
 }
 
 function showContent($page)
 {
     switch($page)
     {
-        case 'home':
-            require('home.php');
+        case 'home';
+            require_once('home.php');
             showHomeContent();
             break;
         case 'about';
-            require('about.php');
+            require_once('about.php');
             showAboutContent();
             break;
         case 'contact';
-            require('contact.php');
+            require_once('contact.php');
             showContactContent();
             break;
-    }
+        }
 }
 
 function showFooter()
 {
-    echo ' <p>&copy;</p>
+    echo ' <footer>
+    <p>&copy;</p>
     <p>2023</p>
-    <p>Omer Seker</p>';
+    <p>Omer Seker</p>
+</footer>';
 }
 
 ?>
