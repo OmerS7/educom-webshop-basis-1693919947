@@ -67,9 +67,9 @@ function test_input($data) {
         echo '<form method="POST" action="index.php">
                 <label for="salutation">Kies uw aanhef:</label>
                 <select id="salutation" name="salutation">
-                    <option value="sir">Heer</option>
-                    <option value="madam">Mevrouw</option>
-                    <option value="other">Anders</option>
+                    <option value="sir" '. ($salutation == "sir" ? "selected" : "") . '>Heer</option>
+                    <option value="madam" '. ($salutation == "madam" ? "selected" : "") . '>Mevrouw</option>
+                    <option value="other" '. ($salutation == "other" ? "selected" : "") .'>Anders</option>
                 </select>
                 <span class="error">* '.$salutationErr.'</span><br><br>
 
