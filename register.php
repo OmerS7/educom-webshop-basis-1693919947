@@ -39,19 +39,40 @@ function test_input($data) {
         }
 
         if (empty($_POST["repeatpassword"])){
-            $repeatpasswordErr = "Wachtwoord komt niet overeen";
+            $repeatpasswordErr = "Herhaal het wachtwoord";
         } else {
             $repeatpassword = test_input($_POST["repeatpassword"]);
+        }
+
+        if ($password !== $repeatpassword) {
+            $repeatpasswordErr = "Wachtwoorden komen niet overeen";
         }
 
         if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($repeatpasswordErr)){
             $valid = true;
         }
+
+        $fileContent = file_get_contents('users.txt');
+
+        /*
+        if (strpos($fileContent, $email) !== false) {
+            $emailErr = "Dit e-mailadres is al geregistreerd.";
+        } else {
+            $newUserData = "$name,$email,$password\n";
+            file_put_contents('users.txt', $newUserData, FILE_APPEND);
+            $confirmationMessage = "Registratie succesvol!";
+        }
+
+        if (isset($confirmationMessage)) {
+            echo '<p class="confirmation-message">' . $confirmationMessage . '</p>';
+        }
+        */
     }
     
+
     if (!$valid) {
    
-      echo '<form method="POST" action="register.php">
+      echo '<form method="POST" action="index.php">
             <label for="name">Naam:</label>
             <input type="text" id="name" name="name" value="'.$name.'">
             <span class="error">* '.$nameErr.'</span><br><br>
@@ -66,15 +87,13 @@ function test_input($data) {
 
             <label for="repeatpassword">Herhaal wachtwoord:</label>
             <input type="password" id="repeatpassword" name="repeatpassword" value="'.$repeatpassword.'">
-            <span class="error">* '.$repeatpasswordErr.'</span><br><br>
+            <span class="error1">* '.$repeatpasswordErr.'</span><br><br>
 
             <div class="signInButton">
-            <input type="hidden" name="page" value="contact">
+            <input type="hidden" name="page" value="register">
                 <input type="submit" value="Sign In">
             </div>
             </form>';
-    } else {
-            echo '<p>Bedankt voor uw reactie.</p>';
-    }
+    } 
 }
 ?>
