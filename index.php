@@ -79,7 +79,11 @@ function showHeader($page)
     } elseif($page == 'contact'){
         require_once('contact.php');
         showContactHeader();
+    } elseif($page == 'register'){
+        require_once('register.php');
+        showRegisterHeader();
     }
+
     echo '</h1></header>' . PHP_EOL;
 }
 
@@ -90,6 +94,7 @@ function showMenu()
               <li><a href="index.php?page=home">HOME</a></li>
               <li><a href="index.php?page=about">ABOUT</a></li>
               <li><a href="index.php?page=contact">CONTACT</a></li>
+              <li><a href="index.php?page=register">REGISTER</a></li>
             </ul>
           </div>' . PHP_EOL;
 }
@@ -109,6 +114,10 @@ function showContent($page)
         case 'contact';
             require_once('contact.php');
             showContactContent();
+            break;
+        case 'register';
+            require_once('register.php');
+            showRegisterContent();
             break;
         }
 }
