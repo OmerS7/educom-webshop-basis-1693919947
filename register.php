@@ -1,7 +1,7 @@
 <?php
 
 function showRegisterHeader() {
-    echo 'Sign In';
+    echo 'Nu registreren';
 }
 
 function test_input($data) {
@@ -33,30 +33,31 @@ function test_input($data) {
         }
 
         if (empty($_POST["password"])){
-            $phoneErr = "Voer geldig wachtwoord in";
+            $passwordErr = "Voer geldig wachtwoord in";
         } else {
-            $phone = test_input($_POST["password"]);
+            $password = test_input($_POST["password"]);
         }
 
         if (empty($_POST["repeatpassword"])){
-            $phoneErr = "Wachtwoord komt niet overeen";
+            $repeatpasswordErr = "Wachtwoord komt niet overeen";
         } else {
-            $phone = test_input($_POST["repeatpassword"]);
+            $repeatpassword = test_input($_POST["repeatpassword"]);
         }
 
-        if (empty($nameErr) && empty($emailErr) && empty($phoneErr) && empty($repeatpasswordErr)){
+        if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($repeatpasswordErr)){
             $valid = true;
         }
     }
     
     if (!$valid) {
    
-      echo '<label for="name">Naam:</label>
+      echo '<form method="POST" action="register.php">
+            <label for="name">Naam:</label>
             <input type="text" id="name" name="name" value="'.$name.'">
             <span class="error">* '.$nameErr.'</span><br><br>
 
             <label for="email">E-mailadres:</label>
-            <input type="email" id="email" name="email" value="'.$email.'">
+            <input type="text" id="email" name="email" value="'.$email.'">
             <span class="error">* '.$emailErr.'</span><br><br>
 
             <label for="password">Wachtwoord:</label>
@@ -64,12 +65,14 @@ function test_input($data) {
             <span class="error">* '.$passwordErr.'</span><br><br>
 
             <label for="repeatpassword">Herhaal wachtwoord:</label>
-            <input type="repeatpassword" id="repeatpassword" name="repeatpassword" value="'.$repeatpassword.'">
+            <input type="password" id="repeatpassword" name="repeatpassword" value="'.$repeatpassword.'">
             <span class="error">* '.$repeatpasswordErr.'</span><br><br>
 
+            <div class="signInButton">
             <input type="hidden" name="page" value="contact">
-                <input type="submit" value="Verzend">';
-
+                <input type="submit" value="Sign In">
+            </div>
+            </form>';
     } else {
             echo '<p>Bedankt voor uw reactie.</p>';
     }

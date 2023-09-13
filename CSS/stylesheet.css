@@ -70,7 +70,10 @@ input {
     box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
+
+
 input[type="radio"]{
+    margin-left: 10px;
     width: auto;
     box-shadow: none;
     background-color: transparent;
@@ -103,6 +106,7 @@ label {
 }
 
 select {
+    margin-left: 50px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: 0.5px solid;
     border-color: rgb(216, 216, 216);
@@ -123,4 +127,8 @@ textarea{
 
 .preferenceSentence{
     color: darkgray;
+}
+
+.signInButton{
+    margin-left: 10px;
 }

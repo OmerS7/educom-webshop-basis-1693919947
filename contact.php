@@ -67,6 +67,7 @@ function test_input($data) {
         echo '<form method="POST" action="index.php">
                 <label for="salutation">Kies uw aanhef:</label>
                 <select id="salutation" name="salutation">
+                    <option value="" '. ($salutation == "" ? "selected" : "") . '></option>
                     <option value="sir" '. ($salutation == "sir" ? "selected" : "") . '>Heer</option>
                     <option value="madam" '. ($salutation == "madam" ? "selected" : "") . '>Mevrouw</option>
                     <option value="other" '. ($salutation == "other" ? "selected" : "") .'>Anders</option>
@@ -85,7 +86,7 @@ function test_input($data) {
                 <input type="email" id="email" name="email" value="'.$email.'">
                 <span class="error">* '.$emailErr.'</span><br><br>
 
-                <p class="preferenceSentence">Kies uw voorkeur</p>
+                <p class="preferenceSentence">Kies uw voorkeur:</p>
                 <label>
                     <input type="radio" name="communication" '.($communication =="Telefoonnummer"? "checked" : "").' value="Telefoonnummer">
                     Telefoonnummer
