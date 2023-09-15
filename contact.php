@@ -11,59 +11,89 @@ function test_input($data) {
     return $data;
 }
 
-    function showContactContent() {
-        $name = $email = $phone = $salutation = $communication = $comment = "";
-        $nameErr = $emailErr = $phoneErr = $salutationErr = $communicationErr = $commentErr = "";
-        $valid = false;
+function showContactThanks($data) {
+    echo '<p class="thankYou>Bedankt voor uw reactie.</p>';
+    echo 'Naam: ' . $data['name'] . '<br>';
+    echo ' Telefoonnummer: ' . $data['phone'] . '<br>';
+    echo ' E-mail: ' . $data['email'] . '<br>';
+    echo ' Communicatie voorkeur: ' . $data['communication'] . '<br>';
+    echo ' Bericht: ' . $data['comment'];
+}
+
+function showContactContent() {
+    $data = validateContact();
+    echo '<section>'; 
+     
+    if (!$data['valid']) { 
+         showContactForm($data);
+    } else {
+         showContactThanks($data);
+    }
+        echo '</section>'; 
+   }
+
+function validateContact(){    
+    $name = $email = $phone = $salutation = $communication = $comment = "";
+    $nameErr = $emailErr = $phoneErr = $salutationErr = $communicationErr = $commentErr = "";
+    $valid = false;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (empty($_POST["name"])) {
-            $nameErr = "Voer een naam in";
-        } else {
-            $name = test_input($_POST["name"]);
-        }
+        $name = test_input(getPostVar("name"));
+        if (empty($name)) { 
+            $nameErr = "Voer een naam in"; 
+        } 
 
-        if (empty($_POST["email"])){
-            $emailErr = "Voer een emailadres in";
-        } else {
-            $email = test_input($_POST["email"]);
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $emailErr = "Voer een geldig emailadres in";
-            }
-        }
+        $email = test_input(getPostVar("email"));
+        if (empty($email)) { 
+            $emailErr = "Voer een emailadres in"; 
+        } 
 
-        if (empty($_POST["phone"])){
+
+        $phone = test_input(getPostVar("phone"));
+        if (empty($phone)) {
             $phoneErr = "Voer een telefoonnummer in";
-        } else {
-            $phone = test_input($_POST["phone"]);
         }
 
-        if (empty($_POST["salutation"])){
+        $salutation = test_input(getPostVar("salutation"));
+        if (empty($salutation)) {
             $salutationErr = "Aanhef verplicht";
-        } else {
-            $salutation = test_input($_POST["salutation"]);
         }
 
-        if (empty($_POST["communication"])){
-            $communicationErr = "Voorkeur is verplicht";
-        } else {
-            $communication = test_input($_POST["communication"]);
+        $communication = test_input(getPostVar("communication"));
+        if (empty($communication)) {
+            $salutationErr = "Communicatie voorkeur is verplicht";
         }
 
-        if (empty($_POST["comment"])){
+        $comment = test_input(getPostVar("comment"));
+        if (empty($comment)) {
             $commentErr = "Plaats een opmerking";
-        } else {
-            $comment = test_input($_POST["comment"]);
         }
 
         if (empty($nameErr) && empty($emailErr) && empty($phoneErr) && empty($salutationErr) && empty($communicationErr) && empty($commentErr)) {
             $valid = true;
         }
     }
+    return array('name' => $name, 'nameErr' => $nameErr, 'email' => $email, 'emailErr' => $emailErr, 'phone' => $phone, 'phoneErr' => $phoneErr, 'salutation' => $salutation, 'salutationErr' => $salutationErr, 'communication' => $communication, 'communicationErr' => $communicationErr,'comment' => $comment, 'commentErr' => $commentErr, 'valid' => $valid);
+}
 
+
+function showContactForm($data) {
     echo '<section>';
 
-    if (!$valid) {
+    $name = $data['name'];
+    $nameErr = $data['nameErr'];
+    $email = $data['email'];
+    $emailErr = $data['emailErr'];
+    $phone = $data['phone'];
+    $phoneErr = $data['phoneErr'];
+    $salutation = $data['salutation'];
+    $salutationErr = $data['salutationErr'];
+    $communication = $data['communication'];
+    $communicationErr = $data['communicationErr'];
+    $comment = $data['comment'];
+    $commentErr = $data['commentErr'];
+
+    if (!$data['valid']) {
         echo '<form method="POST" action="index.php">
                 <label for="salutation">Kies uw aanhef:</label>
                 <select id="salutation" name="salutation">
@@ -72,7 +102,7 @@ function test_input($data) {
                     <option value="madam" '. ($salutation == "madam" ? "selected" : "") . '>Mevrouw</option>
                     <option value="other" '. ($salutation == "other" ? "selected" : "") .'>Anders</option>
                 </select>
-                <span class="error">* '.$salutationErr.'</span><br><br>
+                <span class="error">* '.$data ['salutationErr'].'</span><br><br>
 
                 <label for="name">Naam:</label>
                 <input type="text" id="name" name="name" value="'.$name.'">
@@ -103,161 +133,7 @@ function test_input($data) {
                 <input type="hidden" name="page" value="contact">
                 <input type="submit" value="Verzend">
               </form>';
-    } else {
-        echo '<p>Bedankt voor uw reactie.</p>';
     }
-
+    
     echo '</section>';
 }
-
-
-
-/*
-<!DOCTYPE html>
-<html>
-<head>
-        <link rel="stylesheet"  href="CSS/stylesheet.css">
-</head>
-<body>
-<?php
-     function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-          }
-    
-    $name = $email = $phone = $salutation = $communication = $comment = "";
-    $nameErr = $emailErr = $phoneErr = $salutationErr = $communicationErr = $commentErr = "";
-    $valid = false;
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (empty($_POST["name"])) {
-          $nameErr = "Voer een naam in";
-        } else {
-            $name = test_input($_POST["name"]);
-        }
-
-        if (empty($_POST["email"])){
-            $emailErr = "Voer een emailadres in";
-        } else {
-            $email = test_input($_POST["email"]);
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $emailErr = "Voer een geldig emailadres in";
-              }
-        }
-        
-        if (empty($_POST["phone"])){
-            $phoneErr = "Voer een telefoonnummer in";
-        } else {
-            $phone = test_input($_POST["phone"]); 
-        }
-
-        if (empty($_POST["salutation"])){
-            $salutationErr = "Aanhef verplicht";
-        } else {
-            $salutation = test_input($_POST["salutation"]); 
-        }
-
-        if (empty($_POST["communication"])){
-            $communicationErr = "Voorkeur is verplicht";
-        } else {
-            $communication = test_input($_POST["communication"]); 
-        }
-
-        if (empty($_POST["comment"])){
-            $commentErr = "Plaats een opmerking";
-        } else {
-            $comment = test_input($_POST["comment"]); 
-        }
-
-        if (empty($nameErr) && empty($emailErr) && empty($phoneErr) && empty($salutationErr) && empty($communicationErr) && empty($commentErr)) {
-            $valid = true;
-        }
-
-    }
-    ?>
-    
-    <header>
-        <h1>Contact</h1>
-    </header>
-
-    <div class="menu">
-        <ul>
-            <li><a href="home.php">HOME</a></li>
-            <li><a href="about.php">ABOUT</a></li>
-            <li><a href="contact.php">CONTACT</a></li>
-        </ul>
-    </div>
-
-    <section>
-
-    <?php if (!$valid) { ?>
-
-    <form method="POST" action="contact.php">
-        <div class="salutationbutton"></div>
-            <label for="salutation">Kies uw aanhef:</label>
-            <select id="salutation" name="salutation">
-                <option value="sir">Heer</option>
-                <option value="madam">Mevrouw</option>
-                <option value="other">Anders</option>
-            </select>
-            <span class="error">* <?php echo $salutationErr;?></span>
-                <br><br>     
-        </div>    
-        <div>
-            <label for="name">Naam:</label>
-            <input type="text" id="name" name="name" value="<?php echo $name;?>">
-            <span class="error">* <?php echo $nameErr;?></span>
-            <br><br>
-        </div>
-        <div> 
-            <label for="phone">Telefoonnummer:</label>
-            <input type="tel" id="phone" name="phone" value="<?php echo $phone;?>">
-            <span class="error">* <?php echo $phoneErr;?></span>
-            <br><br>
-        </div>  
-        <div>
-            <label for="e-mail">E-mailadres:</label>
-            <input type="e-mail" id="email" name="email" value="<?php echo $email;?>">
-            <span class="error">* <?php echo $emailErr;?></span>
-            <br><br>
-        </div>
-
-        <div>
-            <p>Kies uw voorkeur</p>
-            <label>
-                <input type="radio" name="communication" <?php if (isset($communication) && $communication =="Telefoonnummer") echo "checked";?> value="Telefoonnummer">
-                Telefoonnummer
-            </label>
-            <br>
-            <label>
-                <input type="radio" name="communication" <?php if (isset($communication) && $communication =="E-mailadres") echo "checked";?> value="E-mailadres">
-                E-mailadres
-            </label>
-            <span class="error">* <?php echo $communicationErr;?></span>
-                <br><br>   
-            </div>
-            <div class="commentContact">
-                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in"><?php echo $comment;?></textarea>
-                <span class="error">* <?php echo $commentErr;?></span>
-                <br><br>               </div>
-            <div class="sendbutton"> 
-                <input type="submit" value="Verzend">
-            </div>
-        </form>
-        
-        <?php } else {?>
-            <p>Bedankt voor uw reactie:</p>
-        <?php }?>
-    </section>
-
-    <footer>
-        <p>&copy;</p>
-        <p>2023</p>
-        <p>Omer Seker</p>
-    </footer>
-
-</body>
-</html>
-*/
