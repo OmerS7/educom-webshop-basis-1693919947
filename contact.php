@@ -4,12 +4,7 @@ function showContactHeader(){
     echo 'Contact';
 }
 
-function testInput($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+include 'utils.php';
 
 function showContactThanks($data) {
     echo '<p class="thankYou"> Bedankt voor uw reactie! </p>';
@@ -44,7 +39,7 @@ function validateContact(){
             $nameErr = "Voer een naam in"; 
         } 
 
-        $email = testinput(getPostVar("email"));
+        $email = testInput(getPostVar("email"));
         if (empty($email)) { 
             $emailErr = "Voer een emailadres in"; 
         } 

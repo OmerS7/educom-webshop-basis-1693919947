@@ -4,12 +4,7 @@ function showRegisterHeader() {
     echo 'Nu registreren';
 }
 
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+include 'utils.php';
 
     function showRegisterContent() {
         $username = $email = $password = $repeatpassword = "";
@@ -17,32 +12,25 @@ function test_input($data) {
         $valid = false;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (empty($_POST["name"])) {
-            $usernameErr = "Voer een naam in";
-        } else {
-            $username = test_input($_POST["name"]);
-        }
+        $username = testInput(getPostVar("name"));
+        if (empty($username)) { 
+            $nameErr = "Voer een naam in"; 
+        } 
 
-        if (empty($_POST["email"])){
-            $emailErr = "Voer een emailadres in";
-        } else {
-            $email = test_input($_POST["email"]);
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $emailErr = "Voer een geldig emailadres in";
-            }
-        }
+        $email = testInput(getPostVar("email"));
+        if (empty($email)) { 
+            $emailErr = "Voer een emailadres in"; 
+        } 
 
-        if (empty($_POST["password"])){
-            $passwordErr = "Voer geldig wachtwoord in";
-        } else {
-            $password = test_input($_POST["password"]);
-        }
+        $password = testInput(getPostVar("password"));
+        if (empty($password)) { 
+            $passwordErr = "Voer geldig wachtwoord in"; 
+        } 
 
-        if (empty($_POST["repeatpassword"])){
-            $repeatpasswordErr = "Herhaal het wachtwoord";
-        } else {
-            $repeatpassword = test_input($_POST["repeatpassword"]);
-        }
+        $repeatpassword = testInput(getPostVar("repeatpassword"));
+        if (empty($password)) { 
+            $repeatpasswordErr = "Herhaal het wachtwoord"; 
+        } 
 
         if ($password !== $repeatpassword) {
             $repeatpasswordErr = "Wachtwoorden komen niet overeen";

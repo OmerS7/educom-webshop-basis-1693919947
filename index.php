@@ -99,6 +99,19 @@ function showMenu()
           </div>' . PHP_EOL;
 }
 
+/*
+function showMenu() { 
+    echo '<div class="menu">  
+        <ul>';
+    showMenuItem("home", "HOME"); 
+    showMenuItem("about", "ABOUT"); 
+    showMenuItem("contact", "CONTACT"); 
+    showMenuItem("register", "REGISTER"); 
+    echo '
+        </ul>  
+    </div>' . PHP_EOL; 
+} */
+
 function showContent($page)
 {
     switch($page)
