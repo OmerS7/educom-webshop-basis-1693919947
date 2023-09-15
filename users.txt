@@ -1,2 +1,4 @@
-[email]|[naam]|[wachtwoord]
+[email]|[name]|[password]
 coach@man-kind.nl|Geert Weggemans|halt!
+otseker@hotmail.com||educom1
+jan@hotmail.com|jan|jan

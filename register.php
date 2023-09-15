@@ -12,15 +12,15 @@ function test_input($data) {
 }
 
     function showRegisterContent() {
-        $name = $email = $password = $repeatpassword = "";
-        $nameErr = $emailErr = $passwordErr = $repeatpasswordErr = "";
+        $username = $email = $password = $repeatpassword = "";
+        $usernameErr = $emailErr = $passwordErr = $repeatpasswordErr = "";
         $valid = false;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($_POST["name"])) {
-            $nameErr = "Voer een naam in";
+            $usernameErr = "Voer een naam in";
         } else {
-            $name = test_input($_POST["name"]);
+            $username = test_input($_POST["name"]);
         }
 
         if (empty($_POST["email"])){
@@ -48,34 +48,45 @@ function test_input($data) {
             $repeatpasswordErr = "Wachtwoorden komen niet overeen";
         }
 
-        if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($repeatpasswordErr)){
+        if (empty($usernameErr) && empty($emailErr) && empty($passwordErr) && empty($repeatpasswordErr)){
             $valid = true;
         }
 
-        $fileContent = file_get_contents('users.txt');
+        $fileContent = fopen("users.txt", "r");
 
-        /*
-        if (strpos($fileContent, $email) !== false) {
-            $emailErr = "Dit e-mailadres is al geregistreerd.";
+        $alreadyRegistered = false;
+
+        while (!feof($fileContent)) {
+            $line = fgets($fileContent);
+            $userData = explode("|", $line);
+            // Voeg hier je logica toe om te controleren of de gebruiker al geregistreerd is
+                if ($userData[0] === $email) {
+                $alreadyRegistered = true;
+                break;
+            }
+        }
+
+        fclose($fileContent);
+
+        if ($alreadyRegistered) {
+            echo "Deze gebruiker is al geregistreerd.";
+            // Toon het registratieformulier opnieuw
         } else {
-            $newUserData = "$name,$email,$password\n";
-            file_put_contents('users.txt', $newUserData, FILE_APPEND);
-            $confirmationMessage = "Registratie succesvol!";
+            // Voeg de nieuwe gebruiker toe aan users.txt
+            $fileContent = fopen("users.txt", "a"); // 'a' opent het bestand voor schrijven, en behoudt bestaande inhoud
+            fwrite($fileContent, "\n$email|$username|$password"); // $newUserData bevat de gegevens van de nieuwe gebruiker
+            fclose($fileContent);
+            echo "Registratie succesvol!";
         }
+    }   
 
-        if (isset($confirmationMessage)) {
-            echo '<p class="confirmation-message">' . $confirmationMessage . '</p>';
-        }
-        */
-    }
     
-
     if (!$valid) {
    
       echo '<form method="POST" action="index.php">
             <label for="name">Naam:</label>
-            <input type="text" id="name" name="name" value="'.$name.'">
-            <span class="error">* '.$nameErr.'</span><br><br>
+            <input type="text" id="name" name="name" value="'.$username.'">
+            <span class="error">* '.$usernameErr.'</span><br><br>
 
             <label for="email">E-mailadres:</label>
             <input type="text" id="email" name="email" value="'.$email.'">
