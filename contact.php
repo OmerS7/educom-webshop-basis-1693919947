@@ -4,7 +4,7 @@ function showContactHeader(){
     echo 'Contact';
 }
 
-function test_input($data) {
+function testInput($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -12,12 +12,13 @@ function test_input($data) {
 }
 
 function showContactThanks($data) {
-    echo '<p class="thankYou>Bedankt voor uw reactie.</p>';
-    echo 'Naam: ' . $data['name'] . '<br>';
-    echo ' Telefoonnummer: ' . $data['phone'] . '<br>';
-    echo ' E-mail: ' . $data['email'] . '<br>';
-    echo ' Communicatie voorkeur: ' . $data['communication'] . '<br>';
-    echo ' Bericht: ' . $data['comment'];
+    echo '<p class="thankYou"> Bedankt voor uw reactie! </p>';
+    echo '<p class="yourInfo"> Uw ingevoerde gegegens: </p>';
+    echo '<li> Naam: ' . $data['name'] . '<br>';
+    echo '<li> Telefoonnummer: ' . $data['phone'] . '<br>';
+    echo '<li> E-mail: ' . $data['email'] . '<br>';
+    echo '<li> Communicatie voorkeur: ' . $data['communication'] . '<br>';
+    echo '<li class="bottomText"> Bericht: ' . $data['comment'] . '<br>';
 }
 
 function showContactContent() {
@@ -38,33 +39,33 @@ function validateContact(){
     $valid = false;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = test_input(getPostVar("name"));
+        $name = testInput(getPostVar("name"));
         if (empty($name)) { 
             $nameErr = "Voer een naam in"; 
         } 
 
-        $email = test_input(getPostVar("email"));
+        $email = testinput(getPostVar("email"));
         if (empty($email)) { 
             $emailErr = "Voer een emailadres in"; 
         } 
 
 
-        $phone = test_input(getPostVar("phone"));
+        $phone = testInput(getPostVar("phone"));
         if (empty($phone)) {
             $phoneErr = "Voer een telefoonnummer in";
         }
 
-        $salutation = test_input(getPostVar("salutation"));
+        $salutation = testInput(getPostVar("salutation"));
         if (empty($salutation)) {
             $salutationErr = "Aanhef verplicht";
         }
 
-        $communication = test_input(getPostVar("communication"));
+        $communication = testInput(getPostVar("communication"));
         if (empty($communication)) {
-            $salutationErr = "Communicatie voorkeur is verplicht";
+            $comunicationErr = "Communicatie voorkeur is verplicht";
         }
 
-        $comment = test_input(getPostVar("comment"));
+        $comment = testInput(getPostVar("comment"));
         if (empty($comment)) {
             $commentErr = "Plaats een opmerking";
         }
