@@ -50,6 +50,7 @@ include 'utils.php';
             // Voeg hier je logica toe om te controleren of de gebruiker al geregistreerd is
                 if ($userData[0] === $email) {
                 $alreadyRegistered = true;
+                /*$emailErr = "Dit e-mailadres is al geregistreerd.";*/
                 break;
             }
         }
@@ -90,7 +91,7 @@ include 'utils.php';
 
             <div class="signInButton">
             <input type="hidden" name="page" value="register">
-                <input type="submit" value="Sign In">
+                <input type="submit" value="Sign Up">
             </div>
             </form>';
     } 

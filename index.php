@@ -139,7 +139,7 @@ function showFooter()
 {
     echo ' <footer>
     <p>&copy;</p>
-    <p>2023</p>
+    <p>2023-</p>
     <p>Omer Seker</p>
 </footer>';
 }
