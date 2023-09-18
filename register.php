@@ -28,7 +28,7 @@ include 'utils.php';
         } 
 
         $repeatpassword = testInput(getPostVar("repeatpassword"));
-        if (empty($password)) { 
+        if (empty($repeatpassword)) { 
             $repeatpasswordErr = "Herhaal het wachtwoord"; 
         } 
 
@@ -37,35 +37,30 @@ include 'utils.php';
         }
 
         if (empty($usernameErr) && empty($emailErr) && empty($passwordErr) && empty($repeatpasswordErr)){
-            $valid = true;
-        }
+            $fileContent = fopen("users.txt", "r");
 
-        $fileContent = fopen("users.txt", "r");
-
-        $alreadyRegistered = false;
-
-        while (!feof($fileContent)) {
-            $line = fgets($fileContent);
-            $userData = explode("|", $line);
-            // Voeg hier je logica toe om te controleren of de gebruiker al geregistreerd is
-                if ($userData[0] === $email) {
-                $alreadyRegistered = true;
-                /*$emailErr = "Dit e-mailadres is al geregistreerd.";*/
-                break;
+            $alreadyRegistered = false;
+    
+            while (!feof($fileContent)) {
+                $line = fgets($fileContent);
+                $userData = explode("|", $line);
+                    if ($userData[0] === $email) {
+                    $alreadyRegistered = true;
+                    $emailErr = "Dit e-mailadres is al geregistreerd.";
+                    break;
+                }
             }
-        }
-
-        fclose($fileContent);
-
-        if ($alreadyRegistered) {
-            echo "Deze gebruiker is al geregistreerd.";
-            // Toon het registratieformulier opnieuw
-        } else {
-            // Voeg de nieuwe gebruiker toe aan users.txt
-            $fileContent = fopen("users.txt", "a"); // 'a' opent het bestand voor schrijven, en behoudt bestaande inhoud
-            fwrite($fileContent, "\n$email|$username|$password"); // $newUserData bevat de gegevens van de nieuwe gebruiker
+    
             fclose($fileContent);
-            echo "Registratie succesvol!";
+    
+            if (!$alreadyRegistered) {
+                $valid = true;
+                // Voeg de nieuwe gebruiker toe aan users.txt
+                $fileContent = fopen("users.txt", "a"); // 'a' opent het bestand voor schrijven, en behoudt bestaande inhoud
+                fwrite($fileContent, "\n$email|$username|$password"); // $newUserData bevat de gegevens van de nieuwe gebruiker
+                fclose($fileContent);
+                echo "Registratie succesvol!";
+            }
         }
     }   
 
