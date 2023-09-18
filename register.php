@@ -14,7 +14,7 @@ include 'utils.php';
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = testInput(getPostVar("name"));
         if (empty($username)) { 
-            $nameErr = "Voer een naam in"; 
+            $usernameErr = "Voer een naam in"; 
         } 
 
         $email = testInput(getPostVar("email"));

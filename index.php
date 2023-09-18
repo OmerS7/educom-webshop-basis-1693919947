@@ -87,6 +87,7 @@ function showHeader($page)
     echo '</h1></header>' . PHP_EOL;
 }
 
+/*
 function showMenu()
 {
     echo '<div class="menu">
@@ -98,8 +99,13 @@ function showMenu()
             </ul>
           </div>' . PHP_EOL;
 }
+*/
 
-/*
+function showMenuItem($page, $label)
+{
+    echo '<li><a href="index.php?page=' . $page . '">' . $label . '</a></li>';
+}
+
 function showMenu() { 
     echo '<div class="menu">  
         <ul>';
@@ -110,7 +116,7 @@ function showMenu() {
     echo '
         </ul>  
     </div>' . PHP_EOL; 
-} */
+} 
 
 function showContent($page)
 {
