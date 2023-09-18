@@ -84,6 +84,7 @@ function showHeader($page)
         showRegisterHeader();
     } elseif($page == 'login'){
         require_once('login.php');
+        showLoginHeader();
     }
     echo '</h1></header>' . PHP_EOL;
 }

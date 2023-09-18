@@ -84,7 +84,7 @@ include 'utils.php';
             <input type="password" id="repeatpassword" name="repeatpassword" value="'.$repeatpassword.'">
             <span class="error1">* '.$repeatpasswordErr.'</span><br><br>
 
-            <div class="signInButton">
+            <div class="signUpButton">
             <input type="hidden" name="page" value="register">
                 <input type="submit" value="Sign Up">
             </div>
