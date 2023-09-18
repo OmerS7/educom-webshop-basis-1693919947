@@ -7,6 +7,16 @@ function showLoginHeader() {
 include 'utils.php';
 
 function showLoginContent() {
+/* session_start(); // Start de sessie
+
+    if (isset($_SESSION['email'])) {
+        // De gebruiker is al ingelogd
+        $ingelogdeEmail = $_SESSION['email'];
+        echo "Je bent al ingelogd als $ingelogdeEmail.";
+        return; // Je kunt hier eventueel iets anders doen, bijvoorbeeld doorverwijzen naar een andere pagina.
+    }
+*/
+
     $email = $password = "";
     $emailErr = $passwordErr = "";
     $valid = false;
@@ -24,24 +34,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } 
 
     if (empty($emailErr) && empty($passwordErr)){
-        $fileContent = fopen("users.txt",'r');
-        $valid = false;
+        $fileContent = file("users.txt");
 
         foreach($fileContent as $line){
-            list($naam, $storedEmail, $storedPassword) = explode("|", $line);
+            list($storedEmail, , $storedPassword) = explode("|", $line);
 
             if ($email == $storedEmail && $password == $storedPassword) {
                 $valid = true;
-                // Voer hier inlogactie uit (bijvoorbeeld sessie starten)
                 break;
             }
         }
-        if (!$valid) {
-            $emailErr = "Onbekend emailadres of onjuist wachtwoord";
-        }
+    } 
+}   
 
+        if ($valid) {
+            session_start();
+            $_SESSION['email'] = $email;
+            
+        } else {
+            $emailErr = "Onbekend emailadres of onjuist wachtwoord";
     }  
-}
+
+echo "Ingevoerd emailadres: $email<br>";
+echo "Ingevoerd wachtwoord: $password<br>";
+echo "Opslagen emailadres: $storedEmail<br>";
+echo "Opslagen wachtwoord: $storedPassword<br>";
+
 
   echo '<form method="POST" action="index.php">
         <label for="email">E-mailadres:</label>
