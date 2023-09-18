@@ -82,8 +82,9 @@ function showHeader($page)
     } elseif($page == 'register'){
         require_once('register.php');
         showRegisterHeader();
+    } elseif($page == 'login'){
+        require_once('login.php');
     }
-
     echo '</h1></header>' . PHP_EOL;
 }
 
@@ -112,7 +113,8 @@ function showMenu() {
     showMenuItem("home", "HOME"); 
     showMenuItem("about", "ABOUT"); 
     showMenuItem("contact", "CONTACT"); 
-    showMenuItem("register", "REGISTER"); 
+    showMenuItem("register", "REGISTER");
+    showMenuItem("login", "LOGIN"); 
     echo '
         </ul>  
     </div>' . PHP_EOL; 
@@ -138,7 +140,11 @@ function showContent($page)
             require_once('register.php');
             showRegisterContent();
             break;
-        }
+        case 'login';
+            require_once('login.php');
+            showLoginContent();
+            break;
+        }   
 }
 
 function showFooter()
