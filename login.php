@@ -13,7 +13,7 @@ function showLoginContent() {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = testInput(getPostVar("email"));
-    $password - testInput(getPostVar("password"));
+    $password = testInput(getPostVar("password"));
 
     if (empty($email)) { 
         $emailErr = "Voer een emailadres in"; 
@@ -24,13 +24,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } 
 
     if (empty($emailErr) && empty($passwordErr)){
-        $fileContent = fopen("users.txt");
+        $fileContent = fopen("users.txt",'r');
         $valid = false;
-    }
-}   
 
+        foreach($fileContent as $line){
+            list($naam, $storedEmail, $storedPassword) = explode("|", $line);
 
-if (!$valid) {
+            if ($email == $storedEmail && $password == $storedPassword) {
+                $valid = true;
+                // Voer hier inlogactie uit (bijvoorbeeld sessie starten)
+                break;
+            }
+        }
+        if (!$valid) {
+            $emailErr = "Onbekend emailadres of onjuist wachtwoord";
+        }
+
+    }  
+}
 
   echo '<form method="POST" action="index.php">
         <label for="email">E-mailadres:</label>
@@ -47,5 +58,4 @@ if (!$valid) {
         </div>
         </form>';
 } 
-}
 ?>
