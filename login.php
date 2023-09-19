@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 
 function showLoginHeader(){
     if(isset($_SESSION['email'])){
@@ -15,25 +14,10 @@ function showLoginHeader() {
     echo 'Login';
 }*/
 
-require 'utils.php';
-require 'file_repository.php';
-require 'user_service.php';
+require_once 'utils.php';
+require_once 'user_service.php';
 
 function showLoginContent() {
-    if (isset($_SESSION['email'])) {
-        $ingelogdeEmail = $_SESSION['email'];
-        return;
-    }
-/* session_start(); // Start de sessie
-
-    if (isset($_SESSION['email'])) {
-        // De gebruiker is al ingelogd
-        $ingelogdeEmail = $_SESSION['email'];
-        echo "Je bent al ingelogd als $ingelogdeEmail.";
-        return; // Je kunt hier eventueel iets anders doen, bijvoorbeeld doorverwijzen naar een andere pagina.
-    }
-*/
-
     $email = $password = "";
     $emailErr = $passwordErr = "";
     $valid = false;
@@ -51,30 +35,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } 
 
     if (empty($emailErr) && empty($passwordErr)){
-        $fileContent = file("users.txt");
-
-        foreach($fileContent as $line){
-            list($storedEmail, , $storedPassword) = explode("|", $line);
-
-            if ($email == $storedEmail && $password == $storedPassword) {
-                $valid = true;
-                break;
-            }
+        $user = authenticateUser($email, $password);
+        if (empty($user)) {
+            $emailErr = "Onbekend emailadres of onjuist wachtwoord";
+        } else {
+            $valid = true;
+            $username = $user['username'];
+            doLoginUser($username);
         }
     } 
 }   
 
-        if ($valid) {
-            $_SESSION['email'] = $email;
-        } else {
-            $emailErr = "Onbekend emailadres of onjuist wachtwoord";
-    }  
-
+/*
 echo "Ingevoerd emailadres: $email<br>";
 echo "Ingevoerd wachtwoord: $password<br>";
 echo "Opslagen emailadres: $storedEmail<br>";
 echo "Opslagen wachtwoord: $storedPassword<br>";
-
+*/
 
   echo '<form method="POST" action="index.php">
         <label for="email">E-mailadres:</label>

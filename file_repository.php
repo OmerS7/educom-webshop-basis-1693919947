@@ -8,19 +8,22 @@ function findUserByEmail($email){
         $userData = explode("|", $line);
 
         if ($userData[0] == $email) {
-            $user = array('email'=> $userData[0]);
-            $user = array('username' => $userData[1]);
-            $user = array('password'=> $userData[2]);
+            $user = array(
+                'email' => $userData[0],
+                'username' => $userData[1],
+                'password' => $userData[2]
+            );
             break;
         }
+    }
         fclose($fileContent);
         return $user;
-    }
 }
 
-function saveUser($email,$name,$password){
+
+function saveUser($email, $username, $password){
     $fileContent = fopen("users.txt", "a");
-    fwrite($fileContent, "\n $email|$username|$password");
+    fwrite($fileContent, "\n$email|$username|$password");
     fclose($fileContent);
 }
 ?>

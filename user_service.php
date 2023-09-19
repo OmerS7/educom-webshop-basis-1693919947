@@ -1,4 +1,6 @@
 <?php
+require_once 'file_repository.php';
+
 function doesEmailExist($email){
     $user = findUserByEmail($email);
     return !empty($user);
@@ -15,9 +17,9 @@ function authenticateUser($email,$password){
     return $user;   
     }
 
-function storeUser($email,$name,$password){
+function storeUser($email,$username,$password){
     $filecontent = fopen ("users.txt", "a");
-    fwrite($fileContent, "\n,$email,$name,$password");
+    fwrite($fileContent, "\n,$email|$username|$password");
     fclose($fileContent);
 }
 ?>

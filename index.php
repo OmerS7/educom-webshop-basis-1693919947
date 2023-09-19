@@ -1,6 +1,9 @@
 <?php
 
+require_once("session_manager.php");
+
 $page = getRequestedPage();
+procesRequest($page);
    showResponsePage($page);
 
 function getRequestedPage()
@@ -17,6 +20,33 @@ function getRequestedPage()
     return $requested_page;
 }
 
+function processRequest()
+{
+    switch($page)
+        {
+        case "login":
+            $data = validateLogin();
+            if ($data['valid'])
+                loginUsere($data['name']);
+                $page = "home";
+        }
+        break;
+        case "contact":
+            $data - validate(contact());
+            if($data['valid']){
+                $page = 'thanks'
+        }
+        break;
+        {
+        case "logout":
+        logoutUser();
+        $page="home"
+        }
+        break;
+        $data['page'] = $page;
+        return $data;
+}
+            
 function showResponsePage ($page)
 {
     beginDocument();
@@ -143,8 +173,12 @@ function showMenu() {
     showMenuItem("home", "HOME"); 
     showMenuItem("about", "ABOUT"); 
     showMenuItem("contact", "CONTACT"); 
-    showMenuItem("register", "REGISTER");
-    showMenuItem("login", "LOGIN"); 
+    if (isUserLoggedIn()) {
+        showMenuItem("logout", "LOG OUT " . getLoggedInUser());
+    } else {
+        showMenuItem("register", "REGISTER");
+        showMenuItem("login", "LOGIN");
+    } 
     echo '
         </ul>  
     </div>' . PHP_EOL; 
@@ -174,6 +208,12 @@ function showContent($page)
             require_once('login.php');
             showLoginContent();
             break;
+        case 'logout':
+            doLogoutUser();
+            require_once('home.php');
+            showHomeContent();
+            break;
+            
         default:
             showPageNotFound();
             break;
