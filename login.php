@@ -65,9 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }   
 
         if ($valid) {
-            /*session_start();*/
             $_SESSION['email'] = $email;
-            
         } else {
             $emailErr = "Onbekend emailadres of onjuist wachtwoord";
     }  

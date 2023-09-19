@@ -70,6 +70,31 @@ function endDocument()
 function showHeader($page)
 {
     echo '<header><h1>';
+    switch($page)
+   {
+    case 'home':
+        require_once('home.php');
+        showHomeHeader();
+        break;
+    case 'about':
+        require_once('about.php');
+        showAboutHeader();
+        break;
+    case 'contact':
+        require_once ('contact.php');
+        showContactHeader();
+        break;
+    case 'register':
+        require_once ('register.php');
+        showRegisterHeader();
+        break;
+    case 'login':
+        require_once('login.php');
+        showLoginHeader();
+        break;
+   }
+   
+   /*
     if ($page == 'home') {
         require_once('home.php');
         showHomeHeader();
@@ -89,6 +114,7 @@ function showHeader($page)
         require_once('login.php');
         showLoginHeader();
     } 
+    */
     echo '</h1></header>' . PHP_EOL;
 }
 
@@ -128,25 +154,28 @@ function showContent($page)
 {
     switch($page)
     {
-        case 'home';
+        case 'home':
             require_once('home.php');
             showHomeContent();
             break;
-        case 'about';
+        case 'about':
             require_once('about.php');
             showAboutContent();
             break;
-        case 'contact';
+        case 'contact':
             require_once('contact.php');
             showContactContent();
             break;
-        case 'register';
+        case 'register':
             require_once('register.php');
             showRegisterContent();
             break;
-        case 'login';
+        case 'login':
             require_once('login.php');
             showLoginContent();
+            break;
+        default:
+            showPageNotFound();
             break;
         }   
 }
