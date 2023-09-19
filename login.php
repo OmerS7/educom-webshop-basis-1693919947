@@ -15,7 +15,9 @@ function showLoginHeader() {
     echo 'Login';
 }*/
 
-include 'utils.php';
+require 'utils.php';
+require 'file_repository.php';
+require 'user_service.php';
 
 function showLoginContent() {
     if (isset($_SESSION['email'])) {
