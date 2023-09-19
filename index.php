@@ -79,13 +79,16 @@ function showHeader($page)
     } elseif($page == 'contact'){
         require_once('contact.php');
         showContactHeader();
+    }elseif (isset($_SESSION['email'])){
+        $ingelogdeEmail = $_SESSION['email'];
+        echo "Welcome, $ingelogdeEmail! <a href='logout.php'>Logout</a>";    
     } elseif($page == 'register'){
         require_once('register.php');
         showRegisterHeader();
     } elseif($page == 'login'){
         require_once('login.php');
         showLoginHeader();
-    }
+    } 
     echo '</h1></header>' . PHP_EOL;
 }
 

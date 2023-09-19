@@ -1,12 +1,27 @@
 <?php
 
+session_start();
+
+function showLoginHeader(){
+    if(isset($_SESSION['email'])){
+        $ingelogdeEmail = $_SESSION['email'];
+        echo '<a href="logout.php">Logout</a>';
+        echo "<span>$ingelogdeEmail!</span>"; 
+    }
+}
+
+/*
 function showLoginHeader() {
     echo 'Login';
-}
+}*/
 
 include 'utils.php';
 
 function showLoginContent() {
+    if (isset($_SESSION['email'])) {
+        $ingelogdeEmail = $_SESSION['email'];
+        return;
+    }
 /* session_start(); // Start de sessie
 
     if (isset($_SESSION['email'])) {
@@ -48,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }   
 
         if ($valid) {
-            session_start();
+            /*session_start();*/
             $_SESSION['email'] = $email;
             
         } else {

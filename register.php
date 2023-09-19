@@ -4,7 +4,7 @@ function showRegisterHeader() {
     echo 'Nu registreren';
 }
 
-include 'utils.php';
+require 'utils.php', 'file_repository.php';
 
     function showRegisterContent() {
         $username = $email = $password = $repeatpassword = "";
@@ -37,22 +37,17 @@ include 'utils.php';
         }
 
         if (empty($usernameErr) && empty($emailErr) && empty($passwordErr) && empty($repeatpasswordErr)){
-            $fileContent = fopen("users.txt", "r");
 
             $alreadyRegistered = false;
-    
-            while (!feof($fileContent)) {
-                $line = fgets($fileContent);
-                $userData = explode("|", $line);
-                    if ($userData[0] === $email) {
-                    $alreadyRegistered = true;
-                    $emailErr = "Dit e-mailadres is al geregistreerd.";
-                    break;
+        }else{}
+            $alreadyRegistered = true;
+                $emailErr = "Dit e-mailadres is al geregistreerd.";
+            break;
                 }
             }
     
-            fclose($fileContent);
-    
+    /*
+
             if (!$alreadyRegistered) {
                 $valid = true;
                 // Voeg de nieuwe gebruiker toe aan users.txt
@@ -60,7 +55,7 @@ include 'utils.php';
                 fwrite($fileContent, "\n$email|$username|$password"); // $newUserData bevat de gegevens van de nieuwe gebruiker
                 fclose($fileContent);
                 echo "Registratie succesvol!";
-            }
+            }*/
         }
     }   
 

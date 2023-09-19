@@ -4,7 +4,7 @@ function showContactHeader(){
     echo 'Contact';
 }
 
-include 'utils.php';
+require 'utils.php';
 
 function showContactThanks($data) {
     echo '<p class="thankYou"> Bedankt voor uw reactie! </p>';

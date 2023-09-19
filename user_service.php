@@ -1,5 +1,5 @@
 <?php
 authenticateUser($email,$password)
-doesEmailExist($emil)
+doesEmailExist($email)
 storeUser($email,$name,$password)
 ?>
