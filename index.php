@@ -3,8 +3,8 @@
 require_once("session_manager.php");
 
 $page = getRequestedPage();
-procesRequest($page);
-   showResponsePage($page);
+$data = processRequest($page);
+showResponsePage($page);
 
 function getRequestedPage()
 {
@@ -20,32 +20,30 @@ function getRequestedPage()
     return $requested_page;
 }
 
-function processRequest()
-{
-    switch($page)
-        {
+function processRequest($page){
+    switch($page){
         case "login":
             $data = validateLogin();
-            if ($data['valid'])
-                loginUsere($data['name']);
+            if ($data['valid']){
+                LoginUser($data['username']);
                 $page = "home";
-        }
-        break;
+            }
+            break;   
         case "contact":
-            $data - validate(contact());
+            $data = validateContact();
             if($data['valid']){
-                $page = 'thanks'
-        }
-        break;
-        {
+                $page = "thanks";
+            }
+            break;      
         case "logout":
-        logoutUser();
-        $page="home"
-        }
-        break;
-        $data['page'] = $page;
-        return $data;
+            LogoutUser();
+            $page = "home";
+            break;
+    }  
+    $data['page'] = $page;
+    return $data;
 }
+
             
 function showResponsePage ($page)
 {
@@ -89,7 +87,7 @@ function showBodySection($page)
     showMenu();
     showContent($page);
     showFooter();
-    echo '  <?body>' .PHP_EOL;
+    echo '  </body>' .PHP_EOL;
 }
 
 function endDocument()
@@ -184,9 +182,9 @@ function showMenu() {
     </div>' . PHP_EOL; 
 } 
 
-function showContent($page)
+function showContent($data)
 {
-    switch($page)
+    switch($data['page'])
     {
         case 'home':
             require_once('home.php');
@@ -206,14 +204,13 @@ function showContent($page)
             break;
         case 'login':
             require_once('login.php');
-            showLoginContent();
+            showLoginForm($data);
             break;
         case 'logout':
             doLogoutUser();
             require_once('home.php');
             showHomeContent();
-            break;
-            
+            break;   
         default:
             showPageNotFound();
             break;

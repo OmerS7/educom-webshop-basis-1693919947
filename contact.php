@@ -57,7 +57,7 @@ function validateContact(){
 
         $communication = testInput(getPostVar("communication"));
         if (empty($communication)) {
-            $comunicationErr = "Communicatie voorkeur is verplicht";
+            $communicationErr = "Communicatie voorkeur is verplicht";
         }
 
         $comment = testInput(getPostVar("comment"));
