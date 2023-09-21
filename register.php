@@ -68,7 +68,7 @@ function validateRegister() {
 function showRegisterContent() {
         $data = validateRegister();
         if ($data['valid']) {
-           saveUser($data['email'], $data['name'], $data['password']);
+           saveUser($data['email'], $data['username'], $data['password']);
            echo "Registration successfull";
         } else {
            showRegisterForm($data);

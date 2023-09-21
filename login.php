@@ -11,7 +11,7 @@ function showLoginHeader(){
     }
 }
 
-function showLoginContent() {
+function validateLogin() {
     $email = $password = "";
     $emailErr = $passwordErr = "";
     $valid = false;
@@ -38,6 +38,7 @@ function showLoginContent() {
                 doLoginUser($username);
             }
         } 
+        return array('email' => $email, 'emailErr' => $emailErr, 'password' => $password, 'passwordErr' => $passwordErr, 'valid' => $valid); 
     }   
 
   echo '<form method="POST" action="index.php">
