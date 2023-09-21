@@ -48,6 +48,7 @@ function processRequest($page){
             require_once('register.php');
             $data = validateRegister();
             if($data['valid']){
+            saveUser($data['email'], $data['username'], $data['password']);
                 $page = "login";
             }
             break;
