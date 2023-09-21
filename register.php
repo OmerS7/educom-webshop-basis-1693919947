@@ -1,11 +1,11 @@
 <?php
 
+require_once 'utils.php'; 
+require_once 'user_service.php';
+
 function showRegisterHeader() {
     echo 'Nu registreren';
 }
-
-require_once 'utils.php'; 
-require_once 'user_service.php';
 
 function validateRegister() {
         $username = $email = $password = $repeatpassword = ""; 
@@ -60,11 +60,8 @@ function validateRegister() {
         'repeatpasswordErr' => $repeatpasswordErr
     );
 }
-
-     /*
-     if (empty($usernameErr) && empty($emailErr) && empty($passwordErr) && empty($repeatpasswordErr));
-     */
-     
+ 
+/*
 function showRegisterContent() {
         $data = validateRegister();
         if ($data['valid']) {
@@ -74,7 +71,7 @@ function showRegisterContent() {
            showRegisterForm($data);
         } 
     }
-
+*/
 
 function showRegisterForm($data) {
 

@@ -9,9 +9,9 @@ function findUserByEmail($email){
 
         if ($userData[0] == $email) {
             $user = array(
-                'email' => $userData[0],
-                'username' => $userData[1],
-                'password' => $userData[2]
+                'email' => trim($userData[0]),
+                'username' => trim($userData[1]),
+                'password' => trim($userData[2])
             );
             break;
         }

@@ -4,7 +4,7 @@ function showContactHeader(){
     echo 'Contact';
 }
 
-require 'utils.php';
+require_once 'utils.php';
 
 function showContactThanks($data) {
     echo '<p class="thankYou"> Bedankt voor uw reactie! </p>';
@@ -15,18 +15,6 @@ function showContactThanks($data) {
     echo '<li> Communicatie voorkeur: ' . $data['communication'] . '<br>';
     echo '<li class="bottomText"> Bericht: ' . $data['comment'] . '<br>';
 }
-
-function showContactContent() {
-    $data = validateContact();
-    echo '<section>'; 
-     
-    if (!$data['valid']) { 
-         showContactForm($data);
-    } else {
-         showContactThanks($data);
-    }
-        echo '</section>'; 
-   }
 
 function validateContact(){    
     $name = $email = $phone = $salutation = $communication = $comment = "";
@@ -74,8 +62,6 @@ function validateContact(){
 
 
 function showContactForm($data) {
-    echo '<section>';
-
     $name = $data['name'];
     $nameErr = $data['nameErr'];
     $email = $data['email'];
@@ -89,47 +75,43 @@ function showContactForm($data) {
     $comment = $data['comment'];
     $commentErr = $data['commentErr'];
 
-    if (!$data['valid']) {
-        echo '<form method="POST" action="index.php">
-                <label for="salutation">Kies uw aanhef:</label>
-                <select id="salutation" name="salutation">
-                    <option value="" '. ($salutation == "" ? "selected" : "") . '></option>
-                    <option value="sir" '. ($salutation == "sir" ? "selected" : "") . '>Heer</option>
-                    <option value="madam" '. ($salutation == "madam" ? "selected" : "") . '>Mevrouw</option>
-                    <option value="other" '. ($salutation == "other" ? "selected" : "") .'>Anders</option>
-                </select>
-                <span class="error">* '.$data ['salutationErr'].'</span><br><br>
+    echo '<form method="POST" action="index.php">
+            <label for="salutation">Kies uw aanhef:</label>
+            <select id="salutation" name="salutation">
+                <option value="" '. ($salutation == "" ? "selected" : "") . '></option>
+                <option value="sir" '. ($salutation == "sir" ? "selected" : "") . '>Heer</option>
+                <option value="madam" '. ($salutation == "madam" ? "selected" : "") . '>Mevrouw</option>
+                <option value="other" '. ($salutation == "other" ? "selected" : "") .'>Anders</option>
+            </select>
+            <span class="error">* '.$data ['salutationErr'].'</span><br><br>
 
-                <label for="name">Naam:</label>
-                <input type="text" id="name" name="name" value="'.$name.'">
-                <span class="error">* '.$nameErr.'</span><br><br>
+            <label for="name">Naam:</label>
+            <input type="text" id="name" name="name" value="'.$name.'">
+            <span class="error">* '.$nameErr.'</span><br><br>
 
-                <label for="phone">Telefoonnummer:</label>
-                <input type="tel" id="phone" name="phone" value="'.$phone.'">
-                <span class="error">* '.$phoneErr.'</span><br><br>
+            <label for="phone">Telefoonnummer:</label>
+            <input type="tel" id="phone" name="phone" value="'.$phone.'">
+            <span class="error">* '.$phoneErr.'</span><br><br>
 
-                <label for="email">E-mailadres:</label>
-                <input type="email" id="email" name="email" value="'.$email.'">
-                <span class="error">* '.$emailErr.'</span><br><br>
+            <label for="email">E-mailadres:</label>
+            <input type="email" id="email" name="email" value="'.$email.'">
+            <span class="error">* '.$emailErr.'</span><br><br>
 
-                <p class="preferenceSentence">Kies uw voorkeur:</p>
-                <label>
-                    <input type="radio" name="communication" '.($communication =="Telefoonnummer"? "checked" : "").' value="Telefoonnummer">
-                    Telefoonnummer
-                </label><br>
-                <label>
-                    <input type="radio" name="communication" '.($communication =="E-mailadres" ? "checked" : "").' value="E-mailadres">
-                    E-mailadres
-                </label>
-                <span class="error">* '.$communicationErr.'</span><br><br>
-                <div class="commentContact">
-                <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in">'.$comment.'</textarea>
-                <span class="error">* '.$commentErr.'</span><br><br>
-                </div>
-                <input type="hidden" name="page" value="contact">
-                <input type="submit" value="Verzend">
-              </form>';
+            <p class="preferenceSentence">Kies uw voorkeur:</p>
+            <label>
+                <input type="radio" name="communication" '.($communication =="Telefoonnummer"? "checked" : "").' value="Telefoonnummer">
+                Telefoonnummer
+            </label><br>
+            <label>
+                <input type="radio" name="communication" '.($communication =="E-mailadres" ? "checked" : "").' value="E-mailadres">
+                E-mailadres
+            </label>
+            <span class="error">* '.$communicationErr.'</span><br><br>
+            <div class="commentContact">
+            <textarea id="comment" name="comment" rows="4" cols="50" placeholder="Voer hier je opmerkingen in">'.$comment.'</textarea>
+            <span class="error">* '.$commentErr.'</span><br><br>
+            </div>
+            <input type="hidden" name="page" value="contact">
+            <input type="submit" value="Verzend">
+            </form>';
     }
-    
-    echo '</section>';
-}

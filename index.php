@@ -5,7 +5,7 @@ require_once("utils.php");
 
 $page = getRequestedPage();
 $data= processRequest($page);
-showResponsePage($page);
+showResponsePage($data);
 
 function getRequestedPage()
 {
@@ -22,24 +22,34 @@ function getRequestedPage()
 }
 
 function processRequest($page){ 
-    $data = array();   
+    /*$data = array();*/   
     switch($page){
         case "login":
+            require_once('login.php');
             $data = validateLogin();
             if ($data['valid']){
-                LoginUser($data['username']);
-                $data['page'] = "home";
+                doLoginUser($data['username']);
+                $page = "home";
             }
             break;   
         case "contact":
+            require_once('contact.php');
             $data = validateContact();
             if($data['valid']){
-                $data['page'] = "thanks";
+                $page = "thanks";
             }
             break;      
         case "logout":
-            LogoutUser();
-            $data['page'] = "home";
+            require_once('logout.php');
+            doLogoutUser();
+            $page = "home";
+            break;
+        case "register":
+            require_once('register.php');
+            $data = validateRegister();
+            if($data['valid']){
+                $page = "login";
+            }
             break;
     }  
     $data['page'] = $page;
@@ -47,11 +57,11 @@ function processRequest($page){
 }
 
             
-function showResponsePage ($page)
+function showResponsePage ($data)
 {
     beginDocument();
     showHeadSection();
-    showBodySection($page);
+    showBodySection($data);
     endDocument();
 }
 
@@ -82,12 +92,12 @@ function showHeadSection()
     echo '  </head>' . PHP_EOL;
 }
 
-function showBodySection($page)
+function showBodySection($data)
 {
     echo '  <body>' . PHP_EOL;
-    showHeader($page);
+    showHeader($data['page']);
     showMenu();
-    showContent($page);
+    showContent($data);
     showFooter();
     echo '  </body>' .PHP_EOL;
 }
@@ -174,7 +184,7 @@ function showMenu() {
     showMenuItem("about", "ABOUT"); 
     showMenuItem("contact", "CONTACT"); 
     if (isUserLoggedIn()) {
-        showMenuItem("logout", "LOG OUT" . getLoggedInUser());
+        showMenuItem("logout", "LOG OUT " . getLoggedInUser());
     } else {
         showMenuItem("register", "REGISTER");
         showMenuItem("login", "LOGIN");
@@ -184,9 +194,10 @@ function showMenu() {
     </div>' . PHP_EOL; 
 } 
 
-function showContent($page)
+function showContent($data)
 {
-    switch($page)
+    echo '<section>'; 
+    switch($data['page'])
     {
         case 'home':
             require_once('home.php');
@@ -198,11 +209,15 @@ function showContent($page)
             break;
         case 'contact':
             require_once('contact.php');
-            showContactContent();
+            showContactForm($data);
+            break;
+        case 'thanks':
+            require_once('contact.php');
+            showContactThanks($data);
             break;
         case 'register':
             require_once('register.php');
-            showRegisterContent();
+            showRegisterForm($data);
             break;
         case 'login':
             require_once('login.php');
@@ -213,10 +228,18 @@ function showContent($page)
             require_once('home.php');
             showHomeContent();
             break;   
-        /*default:
+        default:
             showPageNotFound();
-            break;*/
+            break;
         }   
+    echo '</section>'; 
+
+}
+
+function showPageNotFound(){
+    echo '<div class="content">
+    <p>PAGE NOT FOUND</p>
+    </div>';
 }
 
 function showFooter()
